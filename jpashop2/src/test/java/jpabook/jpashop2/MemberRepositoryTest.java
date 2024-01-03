@@ -1,13 +1,12 @@
 package jpabook.jpashop2;
 
+import jpabook.jpashop2.domain.OrderStatus;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemberRepositoryTest {
@@ -19,12 +18,12 @@ class MemberRepositoryTest {
     @Rollback(false)
     public void testMember() throws Exception{
         //given
-        Member member = new Member();
+        OrderStatus.Member member = new OrderStatus.Member();
         member.setUsername("memberA");
 
         //when
         Long savedId = memberRepository.save(member);
-        Member findMember = memberRepository.find(savedId);
+        OrderStatus.Member findMember = memberRepository.find(savedId);
 
         //then
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());

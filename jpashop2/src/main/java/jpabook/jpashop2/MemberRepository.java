@@ -1,5 +1,6 @@
 package jpabook.jpashop2;
 
+import jpabook.jpashop2.domain.OrderStatus;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,12 +12,12 @@ public class MemberRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public Long save(Member member) {
+    public Long save(OrderStatus.Member member) {
         em.persist(member);
         return member.getId();
     }
 
-    public Member find(Long id) {
-        return em.find(Member.class, id);
+    public OrderStatus.Member find(Long id) {
+        return em.find(OrderStatus.Member.class, id);
     }
 }
