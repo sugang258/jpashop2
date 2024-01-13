@@ -1,16 +1,14 @@
 package jpabook.jpashop2.repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.domain.Order;
-import jpabook.jpashop2.domain.OrderStatus;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 

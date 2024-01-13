@@ -1,5 +1,6 @@
 package jpabook.jpashop2.controller;
 
+import jakarta.validation.Valid;
 import jpabook.jpashop2.domain.Address;
 import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.service.MemberService;
@@ -10,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
