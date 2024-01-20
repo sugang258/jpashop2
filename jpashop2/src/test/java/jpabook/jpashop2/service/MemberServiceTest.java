@@ -3,7 +3,7 @@ package jpabook.jpashop2.service;
 import jpabook.jpashop2.Jpashop2Application;
 import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.repository.MemberRepository;
-import jpabook.jpashop2.service.MemberService;
+import jpabook.jpashop2.repository.MemberRepositoryOld;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,8 @@ import static org.junit.Assert.*;
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     @Rollback(false)
@@ -32,7 +33,7 @@ public class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         //then
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepository.findById(savedId).get());
 
     }
 
