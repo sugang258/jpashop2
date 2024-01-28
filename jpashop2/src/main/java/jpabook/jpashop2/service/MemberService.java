@@ -48,4 +48,13 @@ public class MemberService {
         Member member = memberRepository.findById(id).get();
         member.setName(name);
     }
+
+    @Transactional
+    public Member login(String email, String password) {
+        Member member = memberRepository.findByEmail(email);
+        if (password != member.getPassword()) {
+            throw new IllegalStateException("비밀번호가 맞지 않습니다.");
+        }
+        return member;
+    }
 }

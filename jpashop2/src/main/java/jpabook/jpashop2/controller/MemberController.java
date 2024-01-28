@@ -1,10 +1,13 @@
 package jpabook.jpashop2.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jpabook.jpashop2.domain.Address;
 import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -35,6 +39,8 @@ public class MemberController {
         Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
 
         Member member = new Member();
+        member.setEmail(form.getEmail());
+        member.setPassword(form.getPassword());
         member.setName(form.getName());
         member.setAddress(address);
 
@@ -48,5 +54,29 @@ public class MemberController {
         model.addAttribute("members",members);
 
         return "members/memberList";
+    }
+
+    @GetMapping("/members/login")
+    public String login(Model model) {
+        model.addAttribute("loginForm", new LoginForm());
+        return "members/loginForm";
+    }
+
+    @PostMapping("/members/login")
+    public String login(@Valid LoginForm loginForm, BindingResult result, HttpServletRequest request) {
+
+        if(result.hasErrors()) {
+            return "members/loginForm";
+        }
+
+        log.info("email : ", loginForm.getEmail());
+        log.info("pw : ",loginForm.getPassword());
+        Member member = memberService.login(loginForm.getEmail(), loginForm.getPassword());
+
+
+        HttpSession session = request.getSession();
+        session.setAttribute("SessionConst.LOGIN_MEMBER", member);
+        return "redirect:/";
+
     }
 }

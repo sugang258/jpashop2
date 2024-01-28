@@ -9,10 +9,20 @@
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <div class="jumbo-tron">
         <h1>HELLO SHOP</h1>
+        <c:if test="${not empty member}">
+              <div class="d-flex flex-column mx-auto mx-lg-none" id="d1_3">
+                <div class="mb-2" style="margin:0 auto; color: gray; font-size: 13.5px;">${member.name}님 환영합니다😊</div>
+                <div class="d-flex justify-content-center mt-2" style="width: 80%; margin: 0 auto;">
+                    <div class="login"><a href="/member/logout">🔒Logout</a></div>
+                </div>
+            </div>
+            </c:if>
         <p class="lead">회원 기능</p>
         <p>
             <a class="btn btn-lg btn-secondary" href="/members/new">회원 가입</a>
             <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a>
+            <a class="btn btn-lg btn-secondary" href="/members/login">로그인</a>
+
         </p>
         <p class="lead">상품 기능</p>
         <p>

@@ -11,6 +11,14 @@
   <div th:replace="fragments/bodyHeader :: bodyHeader"/>
   <form role="form" action="/members/new" th:object="${memberForm}" method="post">
     <div class="form-group">
+      <label th:for="email">이메일</label>
+      <input type="text" th:field="*{email}" class="form-control" placeholder="이메일을 입력하세요">
+    </div>
+    <div class="form-group">
+      <label th:for="password">비밀번호</label>
+      <input type="text" th:field="*{password}" class="form-control" placeholder="비밀번호를 입력하세요">
+    </div>
+    <div class="form-group">
       <label th:for="name">이름</label>
       <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요"
              th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'">
