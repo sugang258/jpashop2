@@ -4,6 +4,7 @@ import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.repository.MemberRepository;
 import jpabook.jpashop2.repository.MemberRepositoryOld;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -52,7 +54,7 @@ public class MemberService {
     @Transactional
     public Member login(String email, String password) {
         Member member = memberRepository.findByEmail(email);
-        if (password != member.getPassword()) {
+        if (!(password.equals(member.getPassword()))) {
             throw new IllegalStateException("비밀번호가 맞지 않습니다.");
         }
         return member;

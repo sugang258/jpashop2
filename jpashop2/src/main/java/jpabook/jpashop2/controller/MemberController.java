@@ -62,15 +62,13 @@ public class MemberController {
         return "members/loginForm";
     }
 
-    @PostMapping("/members/login")
+    @PostMapping("members/login")
     public String login(@Valid LoginForm loginForm, BindingResult result, HttpServletRequest request) {
 
         if(result.hasErrors()) {
             return "members/loginForm";
         }
 
-        log.info("email : ", loginForm.getEmail());
-        log.info("pw : ",loginForm.getPassword());
         Member member = memberService.login(loginForm.getEmail(), loginForm.getPassword());
 
 
