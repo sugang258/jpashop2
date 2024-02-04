@@ -4,10 +4,9 @@ import jpabook.jpashop2.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @Slf4j
 public class HomeController {
 
@@ -18,9 +17,12 @@ public class HomeController {
 //    }
 
     @GetMapping("/")
-    public String homeLogin(@SessionAttribute(name = "SessionConst.LOGIN_MEMBER", required = false)Member member, Model model) {
+    public String homeLogin(@SessionAttribute(name = "login_member", required = false) Member member, Model model) {
 
-        model.addAttribute("member", member);
+        if(member != null) {
+            log.info(member.getName());
+            model.addAttribute("member", member);
+        }
         return "home";
 
     }
