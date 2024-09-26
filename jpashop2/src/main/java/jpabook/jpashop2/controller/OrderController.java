@@ -1,5 +1,7 @@
 package jpabook.jpashop2.controller;
 
+import jpabook.jpashop2.common.Constants;
+import jpabook.jpashop2.common.exception.AroundHubException;
 import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.domain.Order;
 import jpabook.jpashop2.domain.item.Item;
@@ -8,6 +10,7 @@ import jpabook.jpashop2.service.ItemService;
 import jpabook.jpashop2.service.MemberService;
 import jpabook.jpashop2.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +58,10 @@ public class OrderController {
     public String cancelOrder(@PathVariable("orderId") Long orderId) {
         orderService.cancelOrder(orderId);
         return "redirect:/orders";
+    }
+
+    @PostMapping(value = "/order/exception")
+    public void exceptionTest() throws AroundHubException {
+        throw new AroundHubException(Constants.ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근이 금지되었습니다.");
     }
 }

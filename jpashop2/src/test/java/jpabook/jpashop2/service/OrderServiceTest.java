@@ -7,7 +7,7 @@ import jpabook.jpashop2.domain.Member;
 import jpabook.jpashop2.domain.Order;
 import jpabook.jpashop2.domain.OrderStatus;
 import jpabook.jpashop2.domain.item.Book;
-import jpabook.jpashop2.exception.NotEnoughStockException;
+import jpabook.jpashop2.common.exception.NotEnoughStockException;
 import jpabook.jpashop2.repository.OrderRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
